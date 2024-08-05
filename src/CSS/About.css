@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Croissant+One&family=Inconsolata:wght@200;900&family=Rubik:wght@300&display=swap");
+
+:root {
+  --color-1: rgb(205, 180, 219);
+  --color-2: rgb(255, 200, 221);
+  --color-3: rgb(255, 175, 204);
+  --color-4: rgb(189, 224, 254);
+  --color-5: rgb(255, 210, 255);
+  --color-6: rgb(70, 11, 70);
+
+  --font-1: "Bebas Neue", sans-serif;
+  --font-2: "Croissant One", cursive;
+  --font-inconsolata: "Inconsolata", monospace;
+  --font-rubik: "Rubik", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.about-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 8rem 1.5rem;
+  background: linear-gradient(to left, var(--color-4), var(--color-5));
+  font-family: var(--font-rubik);
+  color: var(--color-6);
+}
+
+.section-box {
+  padding: 1.5rem;
+  margin: 1rem;
+  background-color: var(--color-1);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.section-box:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  background-image: linear-gradient(to right, #845ec2, #8d69c5, #9775c8, #9f80ca, #a88ccd, #b297d2, #bca3d6, #c6afdb, #d4bde4, #e1ccec, #eedbf6, #fbeaff);
+}
+
+.section-heading {
+  margin-bottom: 1rem;
+  text-align: left;
+  font-size: 2rem;
+
+}
+
+.section-content {
+  font-size: 1.3rem;
+}
+
+@media (max-width: 768px) {
+  .items {
+    margin-top: 4rem;
+  }
+
+  .about-container {
+    padding: 6rem 1.5rem;
+  }
+
+  .section-heading {
+    font-size: 1.5rem;
+  }
+
+  .section-content {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .items {
+    margin-top: 4rem;
+  }
+
+  .about-container {
+    padding: 4rem 1rem;
+  }
+
+  .section-heading {
+    font-size: 1.5rem;
+  }
+
+  .section-content {
+    font-size: 1rem;
+  }
+}
