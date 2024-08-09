@@ -7,7 +7,7 @@ import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"
 import { FormLoader } from "../Components/Loader";
 import convertToBase64 from "./convertToBase64";
-import { GoogleLogin } from "@react-oauth/google";
+import {GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 
 // components
 import toast from 'react-hot-toast';
@@ -35,9 +35,13 @@ const Profile = () => {
   const backendUrl = "https://ecommerce-backend-0wr7.onrender.com/";
 
   const [file, setFile] = useState(null);
- const responseMessage = (response) => {
-   console.log(response);
+  
+ const responseMessage = (credentialResponse) => {
+   const credentialDecoded = jwt_decode(credentialResponse.credential);
+   console.log("Google Login Success:", credentialDecoded);
+   navigate("/product");
  };
+
  const errorMessage = (error) => {
    console.log(error);
  };
@@ -223,53 +227,60 @@ const Profile = () => {
             >
               <h2>{isLogin ? "Login" : "Sign Up"}</h2>
               {isLogin ? (
-                <form onSubmit={handleLoginFormSubmit}>
-                  <div className="input-group">
-                    <EmailIcon className="icon" />
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="Enter Email"
-                      style={{
-                        border: "3px solid var(--color-6)",
-                        borderRadius: "10px",
-                      }}
-                    />
-                  </div>
-                  <div className="input-group">
-                    <input
-                      type={isPasswordVisible ? "text" : "password"}
-                      name="password"
-                      placeholder="Enter Password"
-                      style={{
-                        boxShadow: "none",
-                        width: "100%",
-                        border: "3px solid var(--color-6)",
-                        borderRadius: "10px",
-                      }}
-                    />
-                    {isPasswordVisible ? (
-                      <RemoveRedEyeIcon
-                        className="icon"
-                        onClick={() => setIsPasswordVisible(!isPasswordVisible)}
+                <GoogleOAuthProvider clientId="758500021538-7tm7mv4tas3ouma9bb0uau1ia209al78.apps.googleusercontent.com">
+                  <form onSubmit={handleLoginFormSubmit}>
+                    <div className="input-group">
+                      <EmailIcon className="icon" />
+                      <input
+                        type="email"
+                        name="email"
+                        placeholder="Enter Email"
+                        style={{
+                          border: "3px solid var(--color-6)",
+                          borderRadius: "10px",
+                        }}
                       />
-                    ) : (
-                      <VisibilityOffIcon
-                        className="icon"
-                        onClick={() => setIsPasswordVisible(!isPasswordVisible)}
+                    </div>
+                    <div className="input-group">
+                      <input
+                        type={isPasswordVisible ? "text" : "password"}
+                        name="password"
+                        placeholder="Enter Password"
+                        style={{
+                          boxShadow: "none",
+                          width: "100%",
+                          border: "3px solid var(--color-6)",
+                          borderRadius: "10px",
+                        }}
                       />
-                    )}
-                  </div>
-                  <button type="submit" disabled={isLoading}>
-                    {isLoading ? <FormLoader /> : "Login"}
-                  </button>
-                  <div style={{margin:10}}>
-                    <GoogleLogin
-                      onSuccess={responseMessage}
-                      onError={errorMessage}
-                    />
-                  </div>
-                </form>
+                      {isPasswordVisible ? (
+                        <RemoveRedEyeIcon
+                          className="icon"
+                          onClick={() =>
+                            setIsPasswordVisible(!isPasswordVisible)
+                          }
+                        />
+                      ) : (
+                        <VisibilityOffIcon
+                          className="icon"
+                          onClick={() =>
+                            setIsPasswordVisible(!isPasswordVisible)
+                          }
+                        />
+                      )}
+                    </div>
+                    <button type="submit" disabled={isLoading}>
+                      {isLoading ? <FormLoader /> : "Login"}
+                    </button>
+                    
+                    <div className="googlelogin" >
+                      <GoogleLogin
+                        onSuccess={responseMessage}
+                        onError={errorMessage}
+                      />
+                    </div>
+                  </form>
+                </GoogleOAuthProvider>
               ) : (
                 <form onSubmit={handleSignupFormSubmit}>
                   <div className="input-group">

@@ -134,3 +134,15 @@ button:disabled {
   height: 150px;
   border-radius: 100%;
 }
+
+.googlelogin {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.googlelogin div:hover {
+  background-color: #dbedf8b9;
+  transition: background-color 0.3s ease;
+}
