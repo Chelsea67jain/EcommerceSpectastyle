@@ -38,14 +38,13 @@ const Profile = () => {
   const [file, setFile] = useState(null);
   
  const responseMessage = (credentialResponse) => {
-  alert("hi");
    const credentialDecoded = jwtDecode(credentialResponse.credential);
    console.log("Google Login Success:", credentialDecoded);
-//navigate("/product");
+navigate("/home");
  };
 
  const errorMessage = (error) => {
-  alert("hello");
+
    console.log(error);
    console.log("Failed to login");
  };
