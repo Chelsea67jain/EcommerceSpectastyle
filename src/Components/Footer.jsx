@@ -1,5 +1,4 @@
 import { Fragment, useEffect, useState} from "react";
-import '../CSS/Footer.css';
 import { Facebook, Twitter, Instagram, LinkedIn} from '@mui/icons-material'; // Import the shoes icon
 import XIcon from '@mui/icons-material/X';
 import { useNavigate } from "react-router-dom";
@@ -64,7 +63,7 @@ const Footer = () => {
           <z>Phone: +91 565 8989 878</z>
           <z>Email: spectastyle@gmail.com</z>
           <z>Address: 1234 Smart Street,Nagpur 440058</z>
-          <z style={{fontWeight:'bolder'}}>Design and Develop by <a style={{textDecoration:'none'}} href="https://harshalwebfolio.netlify.app">❤️Harshal Honde❤️</a></z>
+          <span style={{fontWeight:'bolder'}}>Design and Develop by <a style={{textDecoration:'none'}} href="https://harshalwebfolio.netlify.app">❤️Harshal Honde❤️</a></span>
         </div>
 
         <div className="section">

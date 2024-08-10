@@ -8,13 +8,14 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"
 import { FormLoader } from "../Components/Loader";
 import convertToBase64 from "./convertToBase64";
 import {GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import {jwtDecode} from "jwt-decode";
 
 // components
 import toast from 'react-hot-toast';
 import Error from "../Components/Error";
 import UserProfile from "./UserProfile";
 import { useCart } from "../Components/CartContext";
-import ".././CSS/Profile.css";
+import "../CSS/Profile.css";
 import Reg from "/reg.png";
 
 const Profile = () => {
@@ -37,13 +38,16 @@ const Profile = () => {
   const [file, setFile] = useState(null);
   
  const responseMessage = (credentialResponse) => {
-   const credentialDecoded = jwt_decode(credentialResponse.credential);
+  alert("hi");
+   const credentialDecoded = jwtDecode(credentialResponse.credential);
    console.log("Google Login Success:", credentialDecoded);
-   navigate("/product");
+//navigate("/product");
  };
 
  const errorMessage = (error) => {
+  alert("hello");
    console.log(error);
+   console.log("Failed to login");
  };
 
   useEffect(() => {
@@ -210,12 +214,6 @@ const Profile = () => {
 
   return (
     <Fragment>
-      <script
-        src="https://www.google.com/recaptcha/api.js"
-        async
-        defer
-      ></script>
-
       {authenticated ? (
         <UserProfile user={user} />
       ) : (
@@ -226,6 +224,11 @@ const Profile = () => {
               style={{ boxShadow: "25px 25px 100px rgba(0, 0, 0, 0.2)" }}
             >
               <h2>{isLogin ? "Login" : "Sign Up"}</h2>
+              <script
+                src="https://accounts.google.com/gsi/client"
+                async
+              ></script>
+
               {isLogin ? (
                 <GoogleOAuthProvider clientId="758500021538-7tm7mv4tas3ouma9bb0uau1ia209al78.apps.googleusercontent.com">
                   <form onSubmit={handleLoginFormSubmit}>
@@ -272,8 +275,13 @@ const Profile = () => {
                     <button type="submit" disabled={isLoading}>
                       {isLoading ? <FormLoader /> : "Login"}
                     </button>
-                    
-                    <div className="googlelogin" >
+                    <div
+                      style={{
+                        marginTop: 20,
+                        display: "flex",
+                        justifyContent: "center",
+                      }}
+                    >
                       <GoogleLogin
                         onSuccess={responseMessage}
                         onError={errorMessage}

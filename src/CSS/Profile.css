@@ -140,9 +140,10 @@ button:disabled {
   width: 100%;
   justify-content: center;
   margin-top: 10px;
+  
 }
 
-.googlelogin div:hover {
-  background-color: #dbedf8b9;
-  transition: background-color 0.3s ease;
+ .googlelogin div:hover {
+  background-color: #dbedf8b9; 
+   transition: background-color 0.3s ease;
 }
